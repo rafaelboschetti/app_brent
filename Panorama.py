@@ -2,7 +2,7 @@ import os
 import streamlit as st
 
 # Configuração da Página
-st.set_page_config(page_title="Explicação do Modelo", layout="wide")
+st.set_page_config(page_title="Previsão Cotação Brent", layout="wide")
 
 st.title("Análise e Previsão do Preço do Petróleo Brent")
 

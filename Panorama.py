@@ -1,3 +1,4 @@
+import os
 import streamlit as st
 
 # Configuração da Página
@@ -5,8 +6,16 @@ st.set_page_config(page_title="Explicação do Modelo", layout="wide")
 
 st.title("Análise e Previsão do Preço do Petróleo Brent")
 
-# Definição do caminho das imagens
-caminho_imagens = "C:/Users/rafae/OneDrive/Documents/Fase4_pos/projeto_4_deploy/imagens/"
+# Definir caminho das imagens dinamicamente
+caminho_imagens = os.path.join(os.getcwd(), "imagens")
+
+# Função auxiliar para carregar imagens com segurança
+def carregar_imagem(nome_arquivo, legenda):
+    caminho_arquivo = os.path.join(caminho_imagens, nome_arquivo)
+    if os.path.exists(caminho_arquivo):  # Verifica se o arquivo existe
+        st.image(caminho_arquivo, caption=legenda, use_container_width=True)
+    else:
+        st.warning(f"⚠️ Imagem não encontrada: {nome_arquivo}")
 
 # Introdução detalhada
 st.header("Introdução ao Projeto")
@@ -27,7 +36,7 @@ Para compreender melhor os componentes que influenciam a variação do preço do
 
 Essa análise auxilia na identificação de fatores estruturais que influenciam o comportamento do mercado, permitindo uma modelagem mais precisa para a previsão futura.
 """)
-st.image(caminho_imagens + "decomposicao.png", caption="Decomposição da Série Temporal", use_container_width=True)
+carregar_imagem("decomposicao.png", "Decomposição da Série Temporal")
 
 # Análise de Autocorrelação
 st.header("Análise de Autocorrelação")
@@ -39,7 +48,7 @@ A autocorrelação mede o grau de dependência entre os valores passados e futur
 
 Esses gráficos ajudam na identificação da quantidade de defasagens (lags) que devem ser incluídas no modelo preditivo, garantindo que ele capture as relações temporais relevantes da série.
 """)
-st.image(caminho_imagens + "autocorrelacao.png", caption="Gráficos de Autocorrelação (ACF e PACF)", use_container_width=True)
+carregar_imagem("autocorrelacao.png", "Gráficos de Autocorrelação (ACF e PACF)")
 
 # Construção do Modelo Preditivo
 st.header("Construção do Modelo Preditivo")
@@ -70,7 +79,7 @@ Após o treinamento, o modelo foi testado utilizando dados históricos recentes 
 
 A proximidade das duas curvas indica a precisão do modelo, demonstrando que ele consegue captar bem as tendências e flutuações do mercado.
 """)
-st.image(caminho_imagens + "comparacao_real_previsto.png", caption="Comparação de Previsões - XGBoost", use_container_width=True)
+carregar_imagem("comparacao_real_previsto.png", "Comparação de Previsões - XGBoost")
 
 # Distribuição dos Erros do Modelo
 st.header("Distribuição dos Erros do Modelo")
@@ -82,7 +91,7 @@ Para entender melhor a precisão do modelo, analisamos a distribuição dos erro
 
 A análise da distribuição dos resíduos nos ajuda a validar se o modelo é adequado para previsão ou se necessita ajustes.
 """)
-st.image(caminho_imagens + "distribuicao_erros.png", caption="Distribuição dos Erros do Modelo", use_container_width=True)
+carregar_imagem("distribuicao_erros.png", "Distribuição dos Erros do Modelo")
 
 # Previsão para os Próximos 30 Dias
 st.header("Previsão para os Próximos 30 Dias")

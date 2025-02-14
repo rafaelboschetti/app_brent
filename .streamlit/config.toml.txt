@@ -1,0 +1,6 @@
+[theme]
+primaryColor = "#1E3A8A"  # Azul escuro para botões e destaques
+backgroundColor = "#F8F9FA"  # Fundo cinza claro
+secondaryBackgroundColor = "#E5E7EB"  # Sidebar em cinza médio
+textColor = "#111827"  # Preto para textos
+font = "sans serif"
